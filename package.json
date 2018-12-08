@@ -38,7 +38,7 @@
     "migrate-down": "migrate down",
     "migrate": "migrate up",
     "postshrinkwrap": "node -e \"fs.utimesSync('./node_modules', new Date(), new Date());\"",
-    "prettify": "prettier --insert-pragma --ignore-path .eslintignore --write",
+    "prettify": "node ./bin/prettify-files.js",
     "preseed": "npm run check-environment",
     "prestart": "npm run check-environment",
     "pretest": "npm run check-environment",
