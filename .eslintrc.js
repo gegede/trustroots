@@ -1,7 +1,9 @@
+/** @format */
+
 const es2018rules = {
   'no-var': 2,
   'prefer-const': 2,
-  'arrow-spacing': [2, { before: true, after: true }]
+  'arrow-spacing': [2, { before: true, after: true }],
 };
 
 module.exports = {
@@ -10,8 +12,8 @@ module.exports = {
     sourceType: 'module',
   },
   /*
-   * These would ideally belong to their specific overrides,
-   * but overrides can't include extends
+   * These would ideally belong to their specific overrides
+   * but overrides can't include extends:
    * https://github.com/eslint/eslint/issues/8813
    */
   extends: [
@@ -52,46 +54,42 @@ module.exports = {
   },
   /*
     eventually, after the migration, these overrides will become the main rules
-
     it would be nice to keep the rules for client and server separate,
     because eventually, they want to become independent codebases.
   */
   overrides: [
     {
-      /**
-       * Files processed by Prettier
-       * - Run `npm run prettify file.js`
-       * - Add them to the list here
-       * - From now own they will be applied Prettier eslint rules
-       *   and Prettier autoformats those files on commit.
-       */
-      files: ['.eslintrc.js', '.eslintrc-angular.js', 'bin/pre-commit-hook.js'],
+      // overrides for server code
+      // ES 2018 - specify migrated files and folders here
+      files: [
+        '.eslintrc-angular.js',
+        '.eslintrc.js',
+        'bin/ensure-config-exists.js',
+        'bin/ensure-uploads-dir-exists.js',
+        'bin/pre-commit-hook.js',
+        'modules/references/server/**',
+        'modules/references/tests/server/**',
+        'testutils/data.server.testutils.js',
+      ],
+      parserOptions: {
+        ecmaVersion: 2018,
+      },
+      rules: es2018rules,
     },
     {
-    // overrides for server code
-    // ES 2018 - specify migrated files and folders here
-    files: [
-      'testutils/data.server.testutils.js',
-      'modules/references/server/**',
-      'modules/references/tests/server/**'
-    ],
-    parserOptions: {
-      ecmaVersion: 2018
+      // overrides for client/react code
+      files: [
+        'config/webpack/**',
+        'modules/core/client/app/config.js',
+        'modules/**/client/components/**',
+        'modules/core/client/directives/tr-boards.client.directive.js',
+        'modules/core/client/services/photos.service.js',
+      ],
+      parserOptions: {
+        ecmaVersion: 2018,
+        sourceType: 'module',
+      },
+      rules: es2018rules,
     },
-    rules: es2018rules
-  }, {
-    // overrides for client/react code
-    files: [
-      'config/webpack/**',
-      'modules/core/client/app/config.js',
-      'modules/**/client/components/**',
-      'modules/core/client/directives/tr-boards.client.directive.js',
-      'modules/core/client/services/photos.service.js'
-    ],
-    parserOptions: {
-      ecmaVersion: 2018,
-      sourceType: 'module'
-    },
-    rules: es2018rules
-  }]
+  ],
 };
