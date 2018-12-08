@@ -10,7 +10,9 @@ module.exports = {
    * https://github.com/eslint/eslint/issues/8813
    */
   extends: [
-    'plugin:react/recommended'
+    'plugin:react/recommended',
+    'prettier',
+    'prettier/react',
   ],
   settings: {
     react: {
@@ -27,7 +29,11 @@ module.exports = {
     eqeqeq: [2, 'smart'],
     'func-names': 0,
     'guard-for-in': 2,
-    indent: [2, 2, { SwitchCase: 1, VariableDeclarator: { var: 2, let: 2, const: 3 } }],
+    indent: [
+      2,
+      2,
+      { SwitchCase: 1, VariableDeclarator: { var: 2, let: 2, const: 3 } }
+    ],
     'key-spacing': [2, { beforeColon: false, afterColon: true }],
     'keyword-spacing': [2, { before: true, after: true }],
     'max-len': 0,
@@ -55,12 +61,15 @@ module.exports = {
     'one-var': [0, 'never'],
     'one-var-declaration-per-line': [2, 'always'],
     'padded-blocks': 0,
-    'semi': [2, 'always'],
-    'space-before-function-paren': ['error', {
-      'anonymous': 'always',
-      'named': 'never',
-      'asyncArrow': 'always'
-    }],
+    semi: [2, 'always'],
+    'space-before-function-paren': [
+      'error',
+      {
+        anonymous: 'always',
+        named: 'never',
+        asyncArrow: 'always'
+      }
+    ],
     'space-in-parens': [2, 'never'],
     'spaced-comment': [2, 'always'],
     strict: 0,
@@ -70,6 +79,7 @@ module.exports = {
     'vars-on-top': 0
   },
   env: {
+    es6: true,
     node: true,
     browser: true,
     jasmine: true,
@@ -109,7 +119,6 @@ module.exports = {
        *   and Prettier autoformats those files on commit.
        */
       files: ['.eslintrc.js', '.eslintrc-angular.js', 'bin/pre-commit-hook.js'],
-      extends: ['prettier', 'prettier/react']
     },
     {
     // overrides for server code
