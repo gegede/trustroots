@@ -20,23 +20,31 @@ function parseGitDiffToPathArray(command) {
     .filter(name => /\.(js|less|md)$/.test(name));
 }
 
-const dirtyFiles = new Set(parseGitDiffToPathArray('git diff --name-only --diff-filter=ACM'));
-const files = parseGitDiffToPathArray('git diff --cached --name-only --diff-filter=ACM');
+const dirtyFiles = new Set(
+  parseGitDiffToPathArray('git diff --name-only --diff-filter=ACM'),
+);
+const files = parseGitDiffToPathArray(
+  'git diff --cached --name-only --diff-filter=ACM',
+);
 
 dirtyFiles.forEach(file =>
   console.log(
-    chalk.red(`${ file } will not be auto-formatted because it has unstaged changes.`)
-  )
+    chalk.red(
+      `${file} will not be auto-formatted because it has unstaged changes.`,
+    ),
+  ),
 );
 
-const toPrettify = files.filter(file => ! dirtyFiles.has(file));
-toPrettify.forEach(file => console.log(`Prettier formatting staged file: ${ file }`));
+const toPrettify = files.filter(file => !dirtyFiles.has(file));
+toPrettify.forEach(file =>
+  console.log(`Prettier formatting staged file: ${file}`),
+);
 
 if (toPrettify.length) {
   execSync(
-    `./node_modules/.bin/prettier --ignore-path .eslintignore --write --require-pragma ${ toPrettify.join(
-      ' '
-    ) }`
+    `./node_modules/.bin/prettier --ignore-path .eslintignore --write --require-pragma ${toPrettify.join(
+      ' ',
+    )}`,
   );
-  execSync(`git add ${ toPrettify.join(' ') }`);
+  execSync(`git add ${toPrettify.join(' ')}`);
 }
