@@ -45,7 +45,6 @@ module.exports = {
     browser: true,
     element: true,
     inject: true,
-    io: true,
     moment: true,
     Promise: true,
     __TESTING__: true,
@@ -80,8 +79,8 @@ module.exports = {
       // overrides for client/react code
       files: [
         'config/webpack/**',
-        'modules/core/client/app/config.js',
         'modules/**/client/components/**',
+        'modules/core/client/app/config.js',
         'modules/core/client/directives/tr-boards.client.directive.js',
         'modules/core/client/services/photos.service.js',
       ],
