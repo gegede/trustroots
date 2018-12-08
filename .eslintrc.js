@@ -99,7 +99,12 @@ module.exports = {
     it would be nice to keep the rules for client and server separate,
     because eventually, they want to become independent codebases.
   */
-  overrides: [{
+  overrides: [
+    {
+      files: ['.eslintrc.js', '.eslintrc-angular.js', 'bin/pre-commit-hook.js'],
+      extends: ['prettier', 'prettier/react']
+    },
+    {
     // overrides for server code
     // ES 2018 - specify migrated files and folders here
     files: [
