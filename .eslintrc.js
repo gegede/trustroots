@@ -101,6 +101,13 @@ module.exports = {
   */
   overrides: [
     {
+      /**
+       * Files processed by Prettier
+       * - Run `npm run prettify file.js`
+       * - Add them to the list here
+       * - From now own they will be applied Prettier eslint rules
+       *   and Prettier autoformats those files on commit.
+       */
       files: ['.eslintrc.js', '.eslintrc-angular.js', 'bin/pre-commit-hook.js'],
       extends: ['prettier', 'prettier/react']
     },
